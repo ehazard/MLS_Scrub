@@ -1,2 +1,6 @@
 # MLS_Scrub
-Scrubbing specific information from MLS Digital 
+This is an attempt at beginning a collection of projects to pull data from the MLS matchcenter.
+
+###TODO
+* Pull substitute statistics
+* Get all Team url names
