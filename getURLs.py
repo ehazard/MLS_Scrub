@@ -70,8 +70,8 @@ if len(opp) == len(dates):
 else:
     print "There was a problem"
 ## now each final URL is found in fURL[]
-subs = []
 
+subs = []
 for i in fURL:
     url = i
     grossHTML = urllib.urlopen(url)
@@ -80,10 +80,13 @@ for i in fURL:
     allButtons = soup.findAll("table", { "class": "bx-subs bx-table"})[0].findAll('tr')
     subN = 0
     for i in allButtons:
-        if i.findAll('img', {"src": "https://img.mlsdigital.net/www.mlssoccer.com/7/club/87/x50.png"}):
+        src = i.find('img')['src']
+        if src == "https://img.mlsdigital.net/www.mlssoccer.com/7/image/207523/x50.png":
             subN += 1
     subs.append(subN)
-    break
+## the ammount of subs per game is now listed in subs[]
 
+indx = 0
 for i in subs:
-    print i
+    print str(opp[indx]) + " : " +  str(i)
+    indx += 1
