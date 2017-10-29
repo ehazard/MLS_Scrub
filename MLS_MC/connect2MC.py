@@ -5,7 +5,7 @@ url = "https://www.timbers.com/schedule?month=all&year=2017&club_options=7&op=Up
 gross = urllib.urlopen(url)
 lol = gross.read()
 
-soup = BeautifulSoup(lol) #HTML of the above web page is now in *soup*
+soup = BeautifulSoup(lol, "html.parser") #HTML of the above web page is now in *soup*
 
 matchDates = soup.findAll("div", { "class": "match_date"})
 
