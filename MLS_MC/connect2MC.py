@@ -1,4 +1,4 @@
-import urllib, calendar
+import urllib, calendar, urllib2
 from bs4 import BeautifulSoup
 
 def baseHTML():
@@ -12,13 +12,17 @@ def baseHTML():
 
 def matchDates(soup):
     matchDates = soup.findAll("div", { "class": "match_date"})
-    mConv = dict(March=3,April=4,May=5,June=6,July=7,August=8,September=9,October=10)
+    mConv = dict(March='03',April='04',May='05',June='06',July='07',August='08',September='09',October='10')
+    #mNum = dict()
     temp = []
     for i in matchDates:
         string = i.contents[0] # Friday, January 1 2017
         string = string.split(' ', 1) # ['Friday,' 'January 1 2017']
         date = string[1].split(' ') # January 1 2017 -- [0][1][2]
-        dString = date[2] + "-" + str(mConv[date[0]]) + "-" + date[1].replace(",","")
+        day = date[1].replace(",","")
+        if int(day)<10:
+            day = '0' + date[1].replace(",","")
+        dString = date[2] + "-" + str(mConv[date[0]]) + "-" + day + "-"
         temp.append(dString)
     return temp
 
@@ -26,12 +30,9 @@ def homeTeam(soup):
     ## Get the other team's name
     oTeam = soup.findAll("div", {"class": "match_matchup"})
     oTeams_A = []
+    #TO_DO: Clean this if/elif/else crap up
     for j in oTeam:
-        on_hand = str(j.contents[0].lower().replace("at ", ""))
-        if on_hand == "fc dallas": #FC Dallas is special because "fc dallas" is in their URL
-            on_hand = on_hand.replace("sc","").rstrip().replace(" ", "-")
-        else:
-            on_hand = on_hand.replace("fc","").rstrip().replace("sc","").replace(".","").replace(" ", "-")
+        on_hand = str(j.contents[0].lower().replace("at ", "").replace(".","").replace(" ", "-")).rstrip()
         oTeams_A.append(on_hand)
     ## Get who's home
     hORa = soup.findAll("span", { "class": "match_home_away"})
@@ -47,9 +48,33 @@ def homeTeam(soup):
         temp_A.append(team)
     return temp_A
 
+def makeURLs(MDs, homeOaway):
+    indx, preface = 0, "https://matchcenter.mlssoccer.com/matchcenter/"
+    temp_L = []
+    while indx < len(MDs):
+        temp_L.append(preface + MDs[indx] + homeOaway[indx] + "/feed")
+        indx += 1
+    return temp_L
 
+def subs(URLs):
+    subs = []
+    for i in URLs:
+        url = i
+        grossHTML = urllib.urlopen(url)
+        allHTML = grossHTML.read()
+        soup = BeautifulSoup(allHTML, "html.parser")
+        allButtons = soup.findAll("table", { "class": "bx-subs bx-table"})[0].findAll('tr')
+        subN = 0
+        for i in allButtons:
+            src = i.find('img')['src']
+            if src == "https://img.mlsdigital.net/www.mlssoccer.com/7/image/207523/x50.png":
+                subN += 1
+        subs.append(subN)
+    return subs
 ## Main
-# dateTime(YYYY-MM-DD) + HomeTeam + AwayTeam + /recap  ------> 2017-10-25-chicago-fire-vs-new-york-red-bulls/
+# dateTime(YYYY-MM-DD) + HomeTeam + AwayTeam + /recap  ------> 2017-10-25-chicago-fire-vs-new-york-red-bulls/recap
 soup = baseHTML()
 MDs = matchDates(soup)
 homeOaway = homeTeam(soup)
+URLs = makeURLs(MDs,homeOaway)
+subs = subs(URLs)
