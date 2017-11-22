@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "temp.py", line 8, in <module>
+    print str(connect.baseHTML(sea))
+  File "C:\Users\ehazard\Documents\MLS_Scrub\flask\myApp\connect2MC.py", line 17, in baseHTML
+    superCal = subs(URLs)
+  File "C:\Users\ehazard\Documents\MLS_Scrub\flask\myApp\connect2MC.py", line 71, in subs
+    allButtons = soup.findAll("table", { "class": "bx-subs bx-table"})[0].findAll('tr')
+IndexError: list index out of range

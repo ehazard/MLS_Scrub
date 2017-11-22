@@ -77,4 +77,5 @@ soup = baseHTML()
 MDs = matchDates(soup)
 homeOaway = homeTeam(soup)
 URLs = makeURLs(MDs,homeOaway)
-subs = subs(URLs)
+#subs = subs(URLs)
+print URLs
