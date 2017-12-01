@@ -15,7 +15,7 @@ def hello_world():
 def subs_stats():
     if request.method == 'POST':
         team = request.form['teamN']
-        jsonF = open('teams.json').read()
+        jsonF = open('/teams.json').read()
         newDict = json.loads(jsonF) #newDict['SEA']
         subList = connect.baseHTML(newDict[team], team)
         return render_template('placeholder.html', team=team, subList=subList)
