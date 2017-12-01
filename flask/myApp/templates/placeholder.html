@@ -94,7 +94,10 @@
           <hr><hr>
           <div class="col">
             <h2>{{ team }}</h2>
-            <p class="lead">occurs for many reasons. This display doesn't provide any context other than when subs were used.</p>
+            <ul>
+              {% for item in subList %}
+              <li>{{ item }}</li>
+              {% endfor %}
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
-import urllib, calendar, urllib2
+import urllib, calendar, urllib2, json
 from bs4 import BeautifulSoup
 
-def baseHTML(url):
+def baseHTML(url, teamN):
+    global teamCode, teamPic
+    teamCode = teamN
     gross = urllib.urlopen(url)
     lol = gross.read()
     soup = BeautifulSoup(lol, "html.parser")
@@ -15,7 +17,7 @@ def baseHTML(url):
     except:
         print "Error on URL making and sub finding"
     superCal = subs(URLs)
-    return URLs
+    return superCal
 
 def matchDates(soup):
     matchDates = soup.findAll("div", { "class": "match_date"})
@@ -38,17 +40,24 @@ def homeTeam(soup):
     oTeams_A = []
     for j in oTeam:
         on_hand = str(j.contents[0].lower().replace("at ", "").replace(".","").replace(" ", "-")).rstrip()
+        if on_hand == "orlando-city":
+            on_hand = "orlando-city-sc"
+        if on_hand == "columbus-crew":
+            on_hand = "columbus-crew-sc"
         oTeams_A.append(on_hand)
-    ## Get who's home
+    ## Decide if the game is home or away
     hORa = soup.findAll("span", { "class": "match_home_away"})
     temp_A = []
     indx = 0
+    jsonF = open('teamCodes.json').read()
+    TCDicts = json.loads(jsonF) #newDict['SEA']
+    t = TCDicts[teamCode]
     for i in hORa:
         if i.contents[0] == 'H':
-            team = "portland-timbers" + "-vs-" + oTeams_A[indx] # HERE
+            team = t + "-vs-" + oTeams_A[indx]
             indx += 1
         else:
-            team = oTeams_A[indx] +  "-vs-" + "portland-timbers" # HERE
+            team = oTeams_A[indx] +  "-vs-" + t
             indx += 1
         temp_A.append(team)
     return temp_A
@@ -70,10 +79,12 @@ def subs(URLs):
         soup = BeautifulSoup(allHTML, "html.parser")
         allButtons = soup.findAll("table", { "class": "bx-subs bx-table"})[0].findAll('tr')
         subN = 0
+        jsonF = open('teamPics.json').read()
+        TDicts = json.loads(jsonF) #newDict['SEA']
+        t = TDicts[teamCode]
         for i in allButtons:
             src = i.find('img')['src']
-            if src == "https://img.mlsdigital.net/www.mlssoccer.com/7/image/207523/x50.png": # HERE
+            if src == t: # HERE
                 subN += 1
         subs.append(subN)
-
     return subs
