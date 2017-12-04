@@ -1,9 +1,11 @@
-import urllib, calendar, urllib2, json
+import urllib, calendar, urllib2
 from bs4 import BeautifulSoup
 
-def baseHTML(url, teamN):
-    global teamCode, teamPic
+def baseHTML(url, teamN, teamURL_code, TPS):
+    global teamCode, teamPic_S, t
     teamCode = teamN
+    t = teamURL_code
+    teamPic_S = TPS
     gross = urllib.urlopen(url)
     lol = gross.read()
     soup = BeautifulSoup(lol, "html.parser")
@@ -42,16 +44,15 @@ def homeTeam(soup):
         on_hand = str(j.contents[0].lower().replace("at ", "").replace(".","").replace(" ", "-")).rstrip()
         if on_hand == "orlando-city":
             on_hand = "orlando-city-sc"
-        if on_hand == "columbus-crew":
+        elif on_hand == "columbus-crew":
             on_hand = "columbus-crew-sc"
+        elif on_hand == "montreal":
+            on_hand = "montreal-impact"
         oTeams_A.append(on_hand)
     ## Decide if the game is home or away
     hORa = soup.findAll("span", { "class": "match_home_away"})
     temp_A = []
     indx = 0
-    jsonF = open('teamCodes.json').read()
-    TCDicts = json.loads(jsonF) #newDict['SEA']
-    t = TCDicts[teamCode]
     for i in hORa:
         if i.contents[0] == 'H':
             team = t + "-vs-" + oTeams_A[indx]
@@ -79,12 +80,9 @@ def subs(URLs):
         soup = BeautifulSoup(allHTML, "html.parser")
         allButtons = soup.findAll("table", { "class": "bx-subs bx-table"})[0].findAll('tr')
         subN = 0
-        jsonF = open('teamPics.json').read()
-        TDicts = json.loads(jsonF) #newDict['SEA']
-        t = TDicts[teamCode]
         for i in allButtons:
             src = i.find('img')['src']
-            if src == t: # HERE
+            if src == teamPic_S:
                 subN += 1
         subs.append(subN)
     return subs

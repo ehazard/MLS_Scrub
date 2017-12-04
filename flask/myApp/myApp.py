@@ -18,5 +18,5 @@ def subs_stats():
         filename = os.path.join(app.static_folder, 'teams.json')
         with open(filename) as jsonFile:
             newDict = json.load(jsonFile)
-        subList = connect.baseHTML(newDict[team], team)
+        subList = connect.baseHTML(newDict["teamURL"][team], team, newDict["teamCodes"][team], newDict["teamPics"][team])
         return render_template('placeholder.html', team=team, subList=subList)
