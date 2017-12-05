@@ -55,8 +55,90 @@
       </div>
     </header>
 
+    <section id="subS">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm"><h2>How often are coaches using their subs?</h2></div>
+            <div class="col-sm">
+              <p class="lead">Some coaches don't use their subs all the time, that's just a fact; this occurs for many reasons. This display doesn't provide any context other than when subs were used.</p>
+            </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="COL"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163615/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="FCD"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163618/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="HOU"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163619/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="LAG"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163620/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="MIN"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/234567/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="POR"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/207523/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="RSL"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/135746/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="SJE"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/207524/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="SEA"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163610/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="SKC"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/207525/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="Van"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/207526/x25.png"></button></form>
+
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="Atl"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/187990/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="CHI"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163612/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="CCSC"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/175430/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="DC"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/205282/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="MTL"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163607/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="NER"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163609/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="NYC"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/184663/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="NYR"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163608/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="PHI"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/163606/x25.png"></button></form>
+              <form action="/subs#subS" method="post" ><button type="submit" class="btn btn-secondary" name="teamN" value="TFC"><img src="https://img.mlsdigital.net/www.mlssoccer.com/7/image/244210/x25.png"></button></form>
+            </div>
+        </div>
+      </div>
+      <hr><hr>
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm">
+              <h2>{{ team }}</h2>
+                  <table class="table table-dark table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Week #</th>
+                        <th scope="col">Amount of Subs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for subNum in subList %}
+                      <tr>
+                        <th scope="row">{{loop.index}}</th>
+                        <th scope="row">{{subNum}}</th>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+          </div>
+            <div class="col-sm">
+              <h2>{{ team }}</h2>
+              <table class="table table-dark table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Week #</th>
+                    <th scope="col">Amount of Subs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for subNum in subList %}
+                  <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <th scope="row">{{subNum}}</th>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </section>
+<!--
     <section id="subS" class="well text-dark~">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col">
             <h2>How often are coaches using their subs?</h2>
@@ -94,14 +176,27 @@
           <hr><hr>
           <div class="col">
             <h2>{{ team }}</h2>
-            <ul>
-              {% for item in subList %}
-              <li>{{ item }}</li>
-              {% endfor %}
+            <table class="table table-dark table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Week #</th>
+                  <th scope="col">Amount of Subs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for subNum in subList %}
+                <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <th scope="row">{{subNum}}</th>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </section>
+  -->
 
     <section id="ph" class="bg-danger text-white align-bottom">
       <div class="container">
